@@ -1,0 +1,25 @@
+﻿@model CreateBookingModel
+
+ <div class="create-booking">
+    <h2>Create booking</h2>
+
+    <form method="post" action="@Url.Action("SubmitBooking", "Booking")">
+        @Html.HiddenFor(model => model.PropertyId)
+        @Html.HiddenFor(model => model.StartDate)
+        @Html.HiddenFor(model => model.EndDate)
+
+        <div class="form-group">
+            <label for="UserEmail">Email address</label>
+            <input type="email" id="UserEmail" name="UserEmail" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label for="BillingAddress">Billing address</label>
+            <input type="text" id="BillingAddress" name="BillingAddress" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit booking</button>
+        </div>
+    </form>
+</div>
