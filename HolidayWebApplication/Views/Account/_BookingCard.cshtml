@@ -1,0 +1,21 @@
+﻿@using DomainLayer.Entities
+
+@model Booking
+
+<div class="property-card">
+    <div class="property-details">
+        <h4>
+            <a href="@Url.Action("ViewPropertyDetails", "PropertyListing", new { id = Model.Property.Id })">
+                @Model.Property.Name
+            </a>
+        </h4>
+
+        <p>@Model.Property.Blurb</p>
+        <p>Location: @Model.Property.Location</p>
+        <p>Dates booked: @Model.StartDate.ToString("MM/dd/yyyy") - @Model.EndDate.ToString("MM/dd/yyyy")</p>
+    </div>
+
+    <div class="payment-info">
+        <p>Total amount paid: $@(Model.CostPerNight * (Model.EndDate - Model.StartDate).Days)</p>
+    </div>
+</div>
