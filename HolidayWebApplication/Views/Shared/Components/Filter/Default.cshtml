@@ -1,0 +1,15 @@
+﻿<div>
+    <form asp-action="ListAvailable" asp-controller="PropertyListing" method="get">
+        <div>
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="start" min="@DateTime.Now.ToString("yyyy-MM-dd")" required/>
+
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="end" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" required />
+
+            <button type="submit">Search</button>
+        </div>
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </form>
+</div>

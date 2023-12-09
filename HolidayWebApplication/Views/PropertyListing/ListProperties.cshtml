@@ -1,0 +1,20 @@
+﻿@model IEnumerable<PropertyListingModel>
+
+@{
+    ViewBag.Title = "Properties";
+}
+
+<h2>Properties</h2>
+<br />
+
+@await Component.InvokeAsync("Filter")
+<br />
+
+<div class="row">
+    @foreach (var property in Model)
+    {
+        <div class="col-sm-auto col-md-auto col-lg-auto">
+            <partial name="_PropertyCard" model=property />
+        </div>
+    }
+</div>

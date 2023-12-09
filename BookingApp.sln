@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationLayer", "HolidayWebApplication\WebApplicationLayer.csproj", "{F5AD5D50-AB0D-43C6-85AF-575B5C972E67}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainLayer", "HolidayDomain\DomainLayer.csproj", "{7E8BEF4C-D59C-49BA-A715-2D5AA5CBF6EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5AD5D50-AB0D-43C6-85AF-575B5C972E67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5AD5D50-AB0D-43C6-85AF-575B5C972E67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5AD5D50-AB0D-43C6-85AF-575B5C972E67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5AD5D50-AB0D-43C6-85AF-575B5C972E67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E8BEF4C-D59C-49BA-A715-2D5AA5CBF6EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E8BEF4C-D59C-49BA-A715-2D5AA5CBF6EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E8BEF4C-D59C-49BA-A715-2D5AA5CBF6EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E8BEF4C-D59C-49BA-A715-2D5AA5CBF6EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63492134-B6CB-44B6-8EFB-BD6409393CF6}
+	EndGlobalSection
+EndGlobal

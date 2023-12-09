@@ -1,0 +1,32 @@
+﻿@model PropertyListingModel
+
+<div class="property-card">
+    @if (Model.Images.Any())
+    {
+        <img class="card-img-top" src="@Model.Images.First()" alt="Property Image" />
+    }
+    else
+    {
+        <p class="no-image-text">No image available</p>
+    }
+
+    <div class="card">
+        <div class="card-header">
+            <h4>
+                <a href="@Url.Action("ViewPropertyDetails", "PropertyListing", new { id = Model.Id })">
+                    @Model.Name
+                </a>
+            </h4>
+        </div>
+
+        <div class="card-body">
+            <b>@Model.Blurb</b> <br />
+            Location: @Model.Location <br />
+            Number of bedrooms: @Model.NumberOfBedrooms
+        </div>
+
+        <div class="card-footer">
+            Cost per night: @Model.CostPerNight.ToString("c")
+        </div>
+    </div>
+</div>
