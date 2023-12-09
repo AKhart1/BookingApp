@@ -1,0 +1,130 @@
+﻿@model PropertyDetailsModel
+
+@{
+    ViewBag.Title = "Property details";
+}
+
+<h2>Property details</h2>
+<br />
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="property-booking">
+    <form method="post" action="@Url.Action("BookProperty", "Booking")">
+        <input type="hidden" name="propertyId" value="@Model.Id" />
+
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="start" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="end" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" required />
+
+        <button type="submit" class="btn btn-primary">Book property</button>
+    </form>
+    <div id="dateErrorMessage" class="text-danger"></div>
+</div>
+
+<div class="property-details-card">
+    @if (Model.Images.Any())
+    {
+        <img class="card-img-top" src="@Model.Images.First()" alt="Property Image" />
+    }
+    else
+    {
+        <p>No image available</p>
+    }
+
+    <div class="card">
+        <div class="card-body">
+            <h4>@Model.Name</h4>
+            <p>@Model.Description</p>
+            <p><b>@Model.Blurb</b></p>
+            <p>Location: @Model.Location</p>
+            <p>Number of bedrooms: @Model.NumberOfBedrooms</p>
+            <p>Cost per night: @Model.CostPerNight.ToString("c")</p>
+        </div>
+    </div>
+</div>
+
+<div class="add-image-button">
+    <form method="post" asp-controller="PropertyManagement" asp-action="AddImage" asp-route-id="@Model.Id">
+        <button type="submit" class="btn btn-secondary">Add image</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var disabledStartDates = @Html.Raw(Json.Serialize(Model.BookedStartDates.Select(date => date.ToString("yyyy-MM-dd"))));
+        var disabledEndDates = @Html.Raw(Json.Serialize(Model.BookedEndDates.Select(date => date.ToString("yyyy-MM-dd"))));
+
+        var dateErrorMessage = document.getElementById("dateErrorMessage");
+
+        var endDateElement = document.getElementById("endDate");
+        var startDateElement = document.getElementById("startDate");
+
+        function showError(message) {
+            dateErrorMessage.innerText = message;
+        }
+
+        function clearError() {
+            dateErrorMessage.innerText = '';
+        }
+
+        function formatDate(date) {
+            var options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        function checkUnavailableDates() {
+            var start = new Date(startDateElement.value);
+            var end = new Date(endDateElement.value);
+            var unavailableDates = [];
+
+            var startDate = start.setDate(start.getDate() + 1);
+
+            for (var currentDate = new Date(startDate); currentDate <= end; currentDate.setDate(currentDate.getDate() + 1)) {
+                var dateString = currentDate.toISOString().split('T')[0];
+                if (disabledEndDates.includes(dateString)) {
+                    unavailableDates.push(formatDate(currentDate));
+                }
+            }
+
+            if (unavailableDates.length > 0) {
+                showError("Unavailable dates between start date and end date: " + unavailableDates.join(', '));
+                endDateElement.value = '';
+            }
+        }
+
+        document.getElementById("startDate").addEventListener("input", function () {
+            clearError();
+
+            var startDate = new Date(this.value);
+            startDate.setDate(startDate.getDate() + 1);
+            endDateElement.min = startDate.toISOString().split('T')[0];
+
+            if (disabledStartDates.includes(this.value)) {
+                showError("Start date is not available");
+                this.value = '';
+            } else {
+                if (endDateElement.value != '') {
+                    checkUnavailableDates();
+                } else
+                    clearError();
+            }
+        });
+
+        document.getElementById("endDate").addEventListener("input", function () {
+            clearError();
+
+            if (disabledEndDates.includes(this.value)) {
+                showError("End date is not available");
+                this.value = '';
+            } else {
+                if (endDateElement.value != '') {
+                    checkUnavailableDates();
+                } else
+                    clearError();
+            }
+        });
+    });
+</script>

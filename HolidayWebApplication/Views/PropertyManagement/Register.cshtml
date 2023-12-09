@@ -1,0 +1,42 @@
+﻿@model PropertyDetailsModel
+
+@{
+    ViewBag.Title = "Register new property";
+}
+
+<h2>Register new property</h2>
+<br />
+
+<form asp-action="Register" method="post">
+    <div class="form-group">
+        <label asp-for="Name">Name:</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description:</label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Blurb">Blurb:</label>
+        <input asp-for="Blurb" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Location">Location:</label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NumberOfBedrooms">Number of bedrooms:</label>
+        <input asp-for="NumberOfBedrooms" class="form-control" />
+        <span asp-validation-for="NumberOfBedrooms" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CostPerNight">Cost per night:</label>
+        <input asp-for="CostPerNight" class="form-control" />
+        <span asp-validation-for="CostPerNight" class="text-danger"></span>
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-primary">Register property</button>
+</form>
